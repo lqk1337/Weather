@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
@@ -76,7 +77,12 @@ public class CameraActivity extends Activity {
 //            String fp = file.getAbsolutePath();
 //            dbHelper.insertUser(null, fp);
 
+            addPictureRefToDatabase(file);
             startActivity(new Intent(CameraActivity.this, MainActivity.class));
+
+
+
+
 
         }
     }
@@ -125,6 +131,12 @@ public class CameraActivity extends Activity {
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
+    }
+
+    public void addPictureRefToDatabase(File file) {
+        DataBaseHelper dbHelper = new DataBaseHelper(this);
+        dbHelper.insertUser(null, file.getAbsolutePath());
+        System.out.println(dbHelper.getAllUsers());
     }
 
 //    static final int REQUEST_TAKE_PHOTO = 1;
