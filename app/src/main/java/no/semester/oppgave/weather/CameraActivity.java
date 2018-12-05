@@ -76,7 +76,7 @@ public class CameraActivity extends Activity {
 //            String fp = file.getAbsolutePath();
 //            dbHelper.insertUser(null, fp);
 
-
+            startActivity(new Intent(CameraActivity.this, MainActivity.class));
 
         }
     }
