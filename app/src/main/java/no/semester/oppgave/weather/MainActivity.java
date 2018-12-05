@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         tempTextView.setText(String.valueOf(df.format(arrayList.get(0).temp))+getString(R.string.headerCelsius));
         pressureTextView.setText(getString(R.string.headerPressure)+String.valueOf(arrayList.get(0).pressure)+getString(R.string.headerHPA));
         humidityTextView.setText(getString(R.string.headerHumidity)+String.valueOf(arrayList.get(0).humidity) + getString(R.string.headerPercentage));
+
+
     }
 
     public String getURL(){
@@ -100,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         } else {
-            Toast.makeText(mContext, "You need have granted permission", Toast.LENGTH_SHORT).show();
             gps = new GPSTracker(mContext, MainActivity.this);
             // Get location of user to create api-call
             if (gps.canGetLocation()) {
