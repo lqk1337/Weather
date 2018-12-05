@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="headerForecast">Forecast:</string>
+    <string name="headerWind">Wind:</string>
+    <string name="headerPressure">Pressure:</string>
+    <string name="headerHumidity">Humidity:</string>
+    <string name="headerCelsius">°C</string>
+    <string name="headerHPA">hpa</string>
+    <string name="headerPercentage">%</string>
+    <string name="headerMeterPerSeconds">m/s</string>
+    <string name="go_to_camera">Go to camera...</string>
+    <string name="take_picture_of_our_surrounding">Take picture of our surrounding.</string>
+</resources>
