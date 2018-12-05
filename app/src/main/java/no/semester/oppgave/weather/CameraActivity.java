@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class CameraActivity extends Activity {
     ImageView mImageView;
@@ -47,55 +48,62 @@ public class CameraActivity extends Activity {
         System.out.println("hei");
         Integer counter = 0;
         String path = Environment.getExternalStorageDirectory().toString();
-        for (int i= 0; i < Environment.getExternalStorageDirectory().length(); i++) {
-
-            File tmpDir = new File(path, "picture" + i + ".jpg");
-            boolean exists = tmpDir.exists();
-
-            if (exists) {
-                counter++;
-            }
-        }
 
 
-        if(requestCode == CAM_REQUEST) {
-//            String path = Environment.getExternalStorageDirectory().toString();
-            OutputStream fOut = null;
-//            Integer counter = 0;
-            File file = new File(path, "picture" + counter + ".jpg");
-            System.out.println(file.getAbsolutePath());
-            try {
-                fOut = new FileOutputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            if (bitmap != null) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-            }
-            try {
-                if (fOut != null) {
-                    fOut.close();
+        if(resultCode != RESULT_CANCELED){
+            for (int i= 0; i < Environment.getExternalStorageDirectory().length(); i++) {
+
+                File tmpDir = new File(path, "picture" + i + ".jpg");
+                boolean exists = tmpDir.exists();
+
+                if (exists) {
+                    counter++;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-            try {
-                MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(),file.getName());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            if(requestCode == CAM_REQUEST) {
+//            String path = Environment.getExternalStorageDirectory().toString();
+                OutputStream fOut = null;
+                //counter = 0;
+                File file = new File(path, "picture" + counter + ".jpg");
+                System.out.println(file.getAbsolutePath());
+                try {
+                    fOut = new FileOutputStream(file);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if(Objects.requireNonNull(data.getExtras()).get("data") != null) {
+                    Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
+                    if (bitmap != null) {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+                    }
+                }
+
+                try {
+                    if (fOut != null) {
+                        fOut.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(),file.getName());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 //            String fp = file.getAbsolutePath();
 //            dbHelper.insertUser(null, fp);
 
-            addPictureRefToDatabase(file);
-            startActivity(new Intent(CameraActivity.this, MainActivity.class));
+                addPictureRefToDatabase(file);
 
-
-
-
-
+            }
         }
+        startActivity(new Intent(CameraActivity.this, MainActivity.class));
+    }
+
+    public void addPictureRefToDatabase(File file) {
+        DataBaseHelper dbHelper = new DataBaseHelper(this);
+        dbHelper.insertUser(null, file.getAbsolutePath());
+        System.out.println("DB"+dbHelper.getAllUsers());
     }
 
 
@@ -144,11 +152,7 @@ public class CameraActivity extends Activity {
         this.sendBroadcast(mediaScanIntent);
     }
 
-    public void addPictureRefToDatabase(File file) {
-        DataBaseHelper dbHelper = new DataBaseHelper(this);
-        dbHelper.insertUser(null, file.getAbsolutePath());
-        System.out.println(dbHelper.getAllUsers());
-    }
+
 
 //    static final int REQUEST_TAKE_PHOTO = 1;
 //
