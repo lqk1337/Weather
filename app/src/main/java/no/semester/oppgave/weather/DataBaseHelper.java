@@ -62,7 +62,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from users where id="+id+"", null );
+        Cursor res =  db.rawQuery( "select * from pictures where id="+id+"", null );
         return res;
     }
 
