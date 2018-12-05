@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         } else {
-            Toast.makeText(mContext, "You need have granted permission", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "You have permissions", Toast.LENGTH_SHORT).show();
             gps = new GPSTracker(mContext, MainActivity.this);
             // Get location of user to create api-call
             if (gps.canGetLocation()) {
