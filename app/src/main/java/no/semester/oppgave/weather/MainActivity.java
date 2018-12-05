@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tempTextView;
     TextView pressureTextView;
     TextView humidityTextView;
-
+    ImageView mImageView;
 
     GPSTracker gps;
     Context mContext;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Weather> arrayList;
     private static final int CAM_REQUEST=1313;
     DataBaseHelper dbHelper;
+    CameraActivity cam;
 
 
     @Override
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         tempTextView = findViewById(R.id.tempTextView);
         pressureTextView = findViewById(R.id.pressureTextView);
         humidityTextView = findViewById(R.id.humidityTextView);
+        mImageView = findViewById(R.id.mImageView);
 //        new DataBaseHelper(this);
 
         final Button buttonCamera = findViewById(R.id.buttonCamera);
@@ -81,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         tempTextView.setText(String.valueOf(df.format(arrayList.get(0).temp))+getString(R.string.headerCelsius));
         pressureTextView.setText(getString(R.string.headerPressure)+String.valueOf(arrayList.get(0).pressure)+getString(R.string.headerHPA));
         humidityTextView.setText(getString(R.string.headerHumidity)+String.valueOf(arrayList.get(0).humidity) + getString(R.string.headerPercentage));
-
     }
 
     @Override
@@ -119,7 +121,8 @@ public class MainActivity extends AppCompatActivity {
             }
 //            String fp = file.getAbsolutePath();
 //            dbHelper.insertUser(null, fp);
-
+            mImageView.setImageBitmap(bitmap);
+//            cam.galleryAddPic();
 
 
         }
