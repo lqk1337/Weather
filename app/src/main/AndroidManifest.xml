@@ -36,7 +36,8 @@
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Gallery"></activity>
     </application>
 
 </manifest>
