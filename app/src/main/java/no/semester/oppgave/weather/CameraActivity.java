@@ -45,12 +45,23 @@ public class CameraActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("hei");
+        Integer counter = 0;
+        String path = Environment.getExternalStorageDirectory().toString();
+        for (int i= 0; i < Environment.getExternalStorageDirectory().length(); i++) {
+
+            File tmpDir = new File(path, "picture" + i + ".jpg");
+            boolean exists = tmpDir.exists();
+
+            if (exists) {
+                counter++;
+            }
+        }
+
 
         if(requestCode == CAM_REQUEST) {
-
-            String path = Environment.getExternalStorageDirectory().toString();
+//            String path = Environment.getExternalStorageDirectory().toString();
             OutputStream fOut = null;
-            Integer counter = 0;
+//            Integer counter = 0;
             File file = new File(path, "picture" + counter + ".jpg");
             System.out.println(file.getAbsolutePath());
             try {
