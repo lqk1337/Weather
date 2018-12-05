@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         pressureTextView.setText(getString(R.string.headerPressure)+String.valueOf(arrayList.get(0).pressure)+getString(R.string.headerHPA));
         humidityTextView.setText(getString(R.string.headerHumidity)+String.valueOf(arrayList.get(0).humidity) + getString(R.string.headerPercentage));
     }
-    
+
     public String getURL(){
         String latitude;
         String longitude;
