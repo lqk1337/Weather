@@ -75,11 +75,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[] { Integer.toString(id) });
     }
 
-    public ArrayList<String> getAllUsers() {
+    public ArrayList<String> getAllPicturePaths() {
         ArrayList<String> array_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from pictures", null );
+        Cursor res =  db.rawQuery( "select path from pictures", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){

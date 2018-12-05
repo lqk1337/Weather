@@ -147,7 +147,7 @@ public class CameraActivity extends Activity {
     public void addPictureRefToDatabase(File file) {
         DataBaseHelper dbHelper = new DataBaseHelper(this);
         dbHelper.insertUser(null, file.getAbsolutePath());
-        System.out.println(dbHelper.getAllUsers());
+        System.out.println(dbHelper.getAllPicturePaths());
     }
 
 //    static final int REQUEST_TAKE_PHOTO = 1;
