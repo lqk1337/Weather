@@ -19,10 +19,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME , null, 1);
-//        insertUser(null, "fredrik");
-//        insertUser(null, "ola");
-//        insertUser(null, "håvard");
-
     }
 
     @Override
@@ -62,7 +58,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from users where id="+id+"", null );
+        Cursor res =  db.rawQuery( "select * from pictures where id="+id+"", null );
         return res;
     }
 
@@ -74,7 +70,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Integer deleteUser (Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("users",
+        return db.delete("pictures",
                 "id = ? ",
                 new String[] { Integer.toString(id) });
     }

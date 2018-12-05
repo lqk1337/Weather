@@ -72,7 +72,7 @@ public class FetchWeatherData extends AsyncTask<String, Void, ArrayList<Weather>
 
             JSONObject windObject = weatherObject.getJSONObject("wind");
             weather.setWindSpeed(windObject.getDouble("speed"));
-//            weather.setWindDirection(windDirection(windObject.getInt("deg")));
+            weather.setWindDirection(windDirection(windObject.getInt("deg")));
 
 
             JSONObject mainObject = weatherObject.getJSONObject("main");
