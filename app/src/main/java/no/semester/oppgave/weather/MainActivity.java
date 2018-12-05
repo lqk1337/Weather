@@ -8,14 +8,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,17 +34,22 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+
+
     TextView cityTextView;
     TextView descriptionTextView;
     TextView windTextView;
     TextView tempTextView;
     TextView pressureTextView;
     TextView humidityTextView;
-    ImageView mImageView;
+//    ImageView mImageView;
 
     GPSTracker gps;
     Context mContext;
@@ -49,17 +60,25 @@ public class MainActivity extends AppCompatActivity {
     CameraActivity cam;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDrawerLayout = findViewById(R.id.drawer);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         cityTextView = findViewById(R.id.cityTextView);
         descriptionTextView = findViewById(R.id.descriptionTextView);
         windTextView = findViewById(R.id.windTextView);
         tempTextView = findViewById(R.id.tempTextView);
         pressureTextView = findViewById(R.id.pressureTextView);
         humidityTextView = findViewById(R.id.humidityTextView);
-        mImageView = findViewById(R.id.mImageView);
+//        mImageView = findViewById(R.id.mImageView);
 //        new DataBaseHelper(this);
 
         final Button buttonCamera = findViewById(R.id.buttonCamera);
@@ -85,7 +104,37 @@ public class MainActivity extends AppCompatActivity {
         pressureTextView.setText(getString(R.string.headerPressure)+String.valueOf(arrayList.get(0).pressure)+getString(R.string.headerHPA));
         humidityTextView.setText(getString(R.string.headerHumidity)+String.valueOf(arrayList.get(0).humidity) + getString(R.string.headerPercentage));
 
+//        String path = Environment.getExternalStorageDirectory().toString();
+//        File imgFile = new File(path+"/picture" + "0" + ".jpg");
+//        Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//        mImageView.setImageBitmap(bitmap);
 
+
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    public List<String> getPicturePath() {
+        List<String> picturePathList = new ArrayList<>();
+        String path = Environment.getExternalStorageDirectory().toString();
+        for (int i= 0; i < Environment.getExternalStorageDirectory().length(); i++) {
+
+            File tmpDir = new File(path, "picture" + i + ".jpg");
+            boolean exists = tmpDir.exists();
+
+            if (exists) {
+                picturePathList.add(path+"picture" + i + ".jpg");
+            }
+        }
+        return picturePathList;
     }
 
     public String getURL(){
