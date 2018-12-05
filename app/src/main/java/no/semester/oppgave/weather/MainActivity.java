@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     Context mContext;
     FetchWeatherData weather;
     ArrayList<Weather> arrayList;
-    private static final int CAM_REQUEST=1313;
+
     DataBaseHelper dbHelper;
 
 
@@ -84,46 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("hei");
 
-        if(requestCode == CAM_REQUEST) {
-
-            String path = Environment.getExternalStorageDirectory().toString();
-            OutputStream fOut = null;
-            Integer counter = 0;
-            File file = new File(path, arrayList.get(0).name + counter + ".jpg");
-            System.out.println(file.getAbsolutePath());
-            try {
-                fOut = new FileOutputStream(file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            if (bitmap != null) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-            }
-            try {
-                if (fOut != null) {
-                    fOut.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(),file.getName());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-//            String fp = file.getAbsolutePath();
-//            dbHelper.insertUser(null, fp);
-
-
-
-        }
-    }
 
 
 
@@ -196,8 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, CAM_REQUEST);
+            startActivity(new Intent(MainActivity.this, CameraActivity.class));
         }
     }
 }
