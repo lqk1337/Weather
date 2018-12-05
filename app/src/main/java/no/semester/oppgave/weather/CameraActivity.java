@@ -15,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -24,19 +27,60 @@ public class CameraActivity extends Activity {
     ImageView mImageView;
     Bitmap mImageBitmap;
     String mCurrentPhotoPath;
+    private static final int CAM_REQUEST=1313;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         new DataBaseHelper(this);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAM_REQUEST);
 //        dispatchTakePictureIntent(1);
 
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("hei");
 
+        if(requestCode == CAM_REQUEST) {
+
+            String path = Environment.getExternalStorageDirectory().toString();
+            OutputStream fOut = null;
+            Integer counter = 0;
+            File file = new File(path, "picture" + counter + ".jpg");
+            System.out.println(file.getAbsolutePath());
+            try {
+                fOut = new FileOutputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            if (bitmap != null) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            }
+            try {
+                if (fOut != null) {
+                    fOut.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(),file.getName());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+//            String fp = file.getAbsolutePath();
+//            dbHelper.insertUser(null, fp);
+
+
+
+        }
     }
+
 
 //    private void dispatchTakePictureIntent(int actionCode) {
 //        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
