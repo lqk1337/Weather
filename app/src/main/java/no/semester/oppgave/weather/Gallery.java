@@ -4,31 +4,45 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Gallery extends Activity {
     RecyclerView recyclerView;
-    DataBaseHelper dbHelper;
-    private List picturePath;
+    ImageView mImageView;
     ArrayList<String> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_gallery);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+        ArrayList<CreateList> createLists = prepareData();
+        MyAdapter adapter = new MyAdapter(getApplicationContext(), createLists);
+        recyclerView.setAdapter(adapter);
 
     }
 
+    private final String image_titles[] = {};
 
-    public void getImages() {
-        dbHelper.getAllPicturePaths();
-        arrayList = dbHelper.getAllPicturePaths();
+    private final String image_path[] = {};
 
-        for (int i = 0; i <arrayList.size(); i++) {
-            Bitmap bitmap = BitmapFactory.decodeFile(arrayList.get(i));
-            recyclerView.;
-        }
+    private ArrayList<CreateList> prepareData(){
+        DataBaseHelper dbHelper = new DataBaseHelper(this);
+
+
+
+        return dbHelper.getAllPicturePaths();
     }
 }

@@ -75,15 +75,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[] { Integer.toString(id) });
     }
 
-    public ArrayList<String> getAllPicturePaths() {
-        ArrayList<String> array_list = new ArrayList<String>();
+    public ArrayList<CreateList> getAllPicturePaths() {
+        ArrayList<CreateList> array_list = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select path from pictures", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(PICTURES_COLUMN_PATH)));
+            CreateList img = new CreateList();
+            img.setImage_path(res.getString(res.getColumnIndex(PICTURES_COLUMN_PATH)));
+            array_list.add(img);
             res.moveToNext();
         }
         res.close();
