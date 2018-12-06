@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".ShowPermissions" />
+        <activity android:name="no.semester.oppgave.PermissionFragment.ShowPermissions" />
 
         <service android:name=".GPSTracker" />
 

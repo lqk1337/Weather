@@ -1,5 +1,5 @@
 package no.semester.oppgave.weather;
-
+/* Database helper class */
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,9 +13,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "TestDB.db";
     public static final String PICTURES_TABLE_NAME = "pictures";
-    public static final String PICTURES_COLUMN_ID = "id";
     public static final String PICTURES_COLUMN_PATH = "path";
-    public static final Blob PICTURES_COLUMN_IMAGE = null;
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME , null, 1);
@@ -43,36 +41,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", id);
         contentValues.put("path", path);
-//        getBitmapAsByteArray(image);
-//        contentValues.put("image", image);
 
         db.insert("pictures", null, contentValues);
         return true;
-    }
-
-//    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
-//        return outputStream.toByteArray();
-//    }
-
-    public Cursor getData(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from pictures where id="+id+"", null );
-        return res;
-    }
-
-    public int numberOfRows(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, PICTURES_TABLE_NAME);
-        return numRows;
-    }
-
-    public Integer deleteUser (Integer id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("pictures",
-                "id = ? ",
-                new String[] { Integer.toString(id) });
     }
 
     public ArrayList<CreateList> getAllPicturePaths() {
@@ -91,5 +62,4 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         res.close();
         return array_list;
     }
-
 }
