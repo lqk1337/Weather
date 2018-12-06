@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DecimalFormat df = new DecimalFormat("#0");
         cityTextView.setText(arrayList.get(0).name);
         descriptionTextView.setText(getString(R.string.headerForecast)+arrayList.get(0).description);
-        windTextView.setText(getString(R.string.headerWind)+String.valueOf(df.format(arrayList.get(0).windSpeed)) + getString(R.string.headerMeterPerSeconds) + arrayList.get(0).windDirection);
+        windTextView.setText(getString(R.string.headerWind)+String.valueOf(df.format(arrayList.get(0).windSpeed)) + getString(R.string.headerMeterPerSeconds));
+//        windTextView.setText(getString(R.string.headerWind)+String.valueOf(df.format(arrayList.get(0).windSpeed)) + "m/s" + arrayList.get(0).windDirection);
         tempTextView.setText(String.valueOf(df.format(arrayList.get(0).temp))+getString(R.string.headerCelsius));
         pressureTextView.setText(getString(R.string.headerPressure)+String.valueOf(arrayList.get(0).pressure)+getString(R.string.headerHPA));
         humidityTextView.setText(getString(R.string.headerHumidity)+String.valueOf(arrayList.get(0).humidity) + getString(R.string.headerPercentage));

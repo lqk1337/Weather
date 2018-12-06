@@ -17,7 +17,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="105dp"
         android:layout_marginBottom="38dp"
-        android:text="Kautokeino"
+        android:text="@string/kautokeino"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/descriptionTextView"
         app:layout_constraintStart_toStartOf="parent"

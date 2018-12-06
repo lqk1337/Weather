@@ -8,7 +8,7 @@
     <string name="headerHPA">hpa</string>
     <string name="headerPercentage">%</string>
     <string name="headerMeterPerSeconds">m/s</string>
-    <string name="go_to_camera">Go to camera...</string>
+    <string name="go_to_camera">Go to camera…</string>
     <string name="take_picture_of_our_surrounding">Take picture of our surrounding.</string>
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -24,4 +24,5 @@
     <string name="gallery">Gallery</string>
     <string name="permission">Permissions</string>
     <string name="exit">Exit</string>
+    <string name="kautokeino">Kautokeino</string>
 </resources>
