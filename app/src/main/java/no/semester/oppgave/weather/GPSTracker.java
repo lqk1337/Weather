@@ -1,5 +1,5 @@
 package no.semester.oppgave.weather;
-
+/* predefines GPS service class */
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;

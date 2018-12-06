@@ -1,10 +1,8 @@
 package no.semester.oppgave.weather;
-
+/* object class for imagepath */
 public class CreateList {
 
     private String image_path;
-
-
 
     public String getImage_path() {
         return image_path;

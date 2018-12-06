@@ -1,5 +1,5 @@
 package no.semester.oppgave.weather;
-
+/* class to check if user has granted permissions */
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;

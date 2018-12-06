@@ -20,5 +20,8 @@
     <string name="permissions">In this application we only use your location to get the weatherdata from openweatherdata.com.
                                     We only use your camera when you are taking a picture, this picture will be saved in internal storage.
                                     In this application we only use writing to internal storage for your photos</string>
-
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="permission">Permissions</string>
+    <string name="exit">Exit</string>
 </resources>

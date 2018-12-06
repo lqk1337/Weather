@@ -1,16 +1,12 @@
 package no.semester.oppgave.weather;
-
+/* class for prompting permissions at startup */
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Camera;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 import android.support.v4.app.ActivityCompat;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;

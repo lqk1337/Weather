@@ -1,5 +1,5 @@
 package no.semester.oppgave.weather;
-
+/* object class for weather */
 public class Weather {
     String name;
     String description;

@@ -1,12 +1,10 @@
 package no.semester.oppgave.weather;
-
+/* class that fetches the weather-data from openweather.com */
 import android.os.AsyncTask;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,6 +70,7 @@ public class FetchWeatherData extends AsyncTask<String, Void, ArrayList<Weather>
 
             JSONObject windObject = weatherObject.getJSONObject("wind");
             weather.setWindSpeed(windObject.getDouble("speed"));
+            // openweather sometimes removes wind degree from their API, this then becomes null
             weather.setWindDirection(windDirection(windObject.getInt("deg")));
 
 
@@ -103,6 +102,7 @@ public class FetchWeatherData extends AsyncTask<String, Void, ArrayList<Weather>
         return weathers;
     }
 
+    //openweather removes wind degree from their API sometimes, which bugges this
     private String windDirection(int degree) {
         String direction = "";
 

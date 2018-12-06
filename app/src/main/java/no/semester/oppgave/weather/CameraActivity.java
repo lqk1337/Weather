@@ -1,24 +1,16 @@
 package no.semester.oppgave.weather;
 /* class that lets the user take a photo with their native photo application */
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.widget.ImageView;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class CameraActivity extends Activity {
@@ -36,7 +28,6 @@ public class CameraActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("hei");
         Integer counter = 0;
         String path = Environment.getExternalStorageDirectory().toString();
 
@@ -53,7 +44,6 @@ public class CameraActivity extends Activity {
             if(requestCode == CAM_REQUEST) {
                 OutputStream fOut = null;
                 File file = new File(path, "picture" + counter + ".jpg");
-                System.out.println(file.getAbsolutePath());
 
                 try {
                     fOut = new FileOutputStream(file);
@@ -87,7 +77,6 @@ public class CameraActivity extends Activity {
 
     public void addPictureRefToDatabase(File file) {
         DataBaseHelper dbHelper = new DataBaseHelper(this);
-        dbHelper.insertUser(null, file.getAbsolutePath());
-        System.out.println("DB"+dbHelper.getAllPicturePaths());
+        dbHelper.insertPicturePath(null, file.getAbsolutePath());
     }
 }

@@ -3,10 +3,8 @@ package no.semester.oppgave.weather;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import java.sql.Blob;
 import java.util.ArrayList;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -27,6 +25,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         "(id integer primary key AUTOINCREMENT, path varchar)"
 
         );
+        db.close();
     }
 
     @Override
@@ -34,21 +33,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS pictures");
         onCreate(db);
+        db.close();
     }
 
-    public boolean insertUser (Integer id, String path) {
+    public boolean insertPicturePath (Integer id, String path) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", id);
         contentValues.put("path", path);
-
         db.insert("pictures", null, contentValues);
+        db.close();
         return true;
     }
 
     public ArrayList<CreateList> getAllPicturePaths() {
         ArrayList<CreateList> array_list = new ArrayList<>();
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select path from pictures", null );
         res.moveToFirst();
@@ -60,6 +59,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
         res.close();
+        db.close();
         return array_list;
     }
 }
