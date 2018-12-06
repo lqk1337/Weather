@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,7 @@ import no.semester.oppgave.PermissionFragment.ShowPermissions;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private DrawerLayout mDrawerLayout;
+    protected DrawerLayout mDrawer;
     TextView cityTextView;
     TextView descriptionTextView;
     TextView windTextView;
