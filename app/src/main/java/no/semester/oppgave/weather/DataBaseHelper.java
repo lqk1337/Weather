@@ -25,7 +25,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         "(id integer primary key AUTOINCREMENT, path varchar)"
 
         );
-        db.close();
     }
 
     @Override
@@ -33,7 +32,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS pictures");
         onCreate(db);
-        db.close();
     }
 
     public boolean insertPicturePath (Integer id, String path) {
@@ -42,7 +40,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("id", id);
         contentValues.put("path", path);
         db.insert("pictures", null, contentValues);
-        db.close();
         return true;
     }
 
@@ -59,7 +56,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
         res.close();
-        db.close();
         return array_list;
     }
 }
