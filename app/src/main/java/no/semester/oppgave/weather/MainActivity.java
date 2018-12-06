@@ -223,7 +223,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, Gallery.class));
         } else if (id == R.id.nav_exit) {
             System.exit(-1);
-
+        } else if (id == R.id.nav_permissions) {
+            startActivity(new Intent(MainActivity.this, ShowPermissions.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

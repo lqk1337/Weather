@@ -17,4 +17,7 @@
     <string name="nav_header_subtitle">Choose one of options below</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="permissionsLocation">In this application we only use your location to get the weatherdata from openweatherdata.com</string>
+    <string name="permissionsCamera">In this application we only use your camera when you are taking a picture, this picture will be saved in internal storage </string>
+    <string name="permissionsWrite">In this application we only use writing to internal storage for your photos </string>
 </resources>
